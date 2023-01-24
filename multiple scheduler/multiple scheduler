@@ -1,0 +1,21 @@
+What – Multiple Schedulers
+kubectl get po -n kube-system
+
+Why – To have a different algorithm in addition to default one for scheduling pods
+
+How – Write a new scheduler, create its docker image and run it as pod.
+cd /etc/kubernetes/manifests
+sudo chmod 777 kube-scheduler.yaml
+
+    - --port=10308
+    - --scheduler-name=my-scheduler
+    - --secure-port=10330
+
+# to check which application is running in this port number
+ sudo netstat -netulp | grep 10259
+
+https://kubernetes.io/docs/reference/command-line-tools-reference/kube-scheduler/
+
+kubectl logs my-scheduler -n kube-system
+
+schedulerName: my-scheduler
